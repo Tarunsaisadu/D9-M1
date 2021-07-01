@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- saved from url=(0436)https://s3.eu-west-1.amazonaws.com/eduflow-production/activity-resources/191767270778436.html?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2TAWW44RCEE6YREN%2F20210701%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20210701T121922Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27M1-D9.html&X-Amz-Signature=a32e1d1dbc6b27c71cd65d81d56d6a569925794e09126e9c4dcd91633c029a61 -->
+<html>
+  <!--
+        BINGO CHALLENGE!!!
+        Create programmatically (with JS) a BINGO board with 76 cells, from 1 to 76.
+        Create a button to randomize a number from 1 to 76. The same number should be highlighted on the bingo board
+
+        EXTRA: 
+        - Take ALWAYS a new number (eg. avoid randoming the number 10 3 times)
+        - Create a USER BOARD with 24 randomized numbers that highlights as the main board does
+        - Let the user choose HOW MANY user boards he's willing to play with and create them.
+    --><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+
+    <title>Its Bingo Time</title>
+  </head>
+  <script>
+    function numgen() {
+      var n = Math.floor(Math.random() * 76) + 1;
+      var table = document.getElementById("tableID");
+      var tbody = table.getElementsByTagName("tbody")[0];
+      var cells = tbody.getElementsByTagName("td");
+      for (var i = 0, len = cells.length; i < len; i++) {
+        if (parseInt(cells[i].innerHTML, 10) == n) {
+          cells[i].style.backgroundColor = "red";
+        }
+      }
+    }
+    function newbox() {
+      // get the reference for the body
+      var body = document.getElementsByTagName("body")[0];
+
+      // creates a <table> element and a <tbody> element
+      var tbl = document.createElement("table");
+      var tblBody = document.createElement("tbody");
+      tbl.setAttribute("id", "tableID");
+      // creating all cells
+      for (var i = 0; i < 9; i++) {
+        // creates a table row
+        var row = document.createElement("tr");
+
+        for (var j = 0; j < 9; j++) {
+          // Create a <td> element and a text node, make the text
+          // node the contents of the <td>, and put the <td> at
+          // the end of the table row
+          var cell = document.createElement("td");
+          var r = Math.floor(Math.random() * 76) + 1;
+          var cellText = document.createTextNode(r);
+          cell.appendChild(cellText);
+          row.appendChild(cell);
+        }
+
+        // add the row to the end of the table body
+        tblBody.appendChild(row);
+      }
+
+      // put the <tbody> in the <table>
+      tbl.appendChild(tblBody);
+      // appends <table> into <body>
+      body.appendChild(tbl);
+      tbl.setAttribute("border", "3");
+    }
+    // sets the border attribute of tbl
+  </script>
+  <style>
+    body {
+      background-color: rgb(10, 10, 10);
+      color: rgb(204, 248, 7);
+      max-width: max-content;
+      max-width: 1280px;
+      margin: 25 auto;
+      font-family: "Nunito Sans", sans-serif;
+      vertical-align: middle;
+      display: inline-block;
+      width: max-content;
+      min-height: 200px;
+      text-align: center;
+    }
+  </style>
+
+  <body>
+    <h1>Bingo game</h1>
+    <button onclick="numgen()">click to genrate a number</button>
+    <button onclick="newbox()">click for new Box</button>
+  </body>
+</html>
